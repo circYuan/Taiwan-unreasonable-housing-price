@@ -218,6 +218,11 @@ select {
    - analysis goes below map
    =========================== */
 @media (max-width: 900px) {
+  #map {
+    height: 48vh;
+    min-height: 320px;
+  }
+
   .split {
     flex-direction: column;
     height: auto;
