@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>縣市行政區房價</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <div class="panel" id="panel">
+    <div class="row">
+      <div class="title">
+        <a id="back" href="./index.html" style="text-decoration:none;">←</a>
+        <span id="cityTitle">縣市</span>：<span id="name">（滑鼠移上去）</span>
+      </div>
+      <div class="muted">樣本數：<span id="count">—</span></div>
+    </div>
+
+    <div class="row" style="margin-top:6px;">
+      <div id="value">—</div>
+      <div class="muted" id="unit"></div>
+    </div>
+
+    <div class="row" style="margin-top:8px;">
+      <div class="muted">季度：</div>
+      <select id="quarter"></select>
+
+      <div class="muted">指標：</div>
+      <select id="metric">
+        <option value="median_total_price">總價中位數</option>
+        <option value="median_unit_price_ping">單價中位數（元/坪）</option>
+      </select>
+
+      <div class="muted">（樣本 &lt; 10 會淡化）</div>
+    </div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script type="module" src="./js/city_app.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,42 @@
+html, body { height: 100%; margin: 0; background: #fff; }
+#map { height: 100%; background: #fff; }
+
+.panel {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+  min-width: 360px;
+}
+
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.title { font-weight: 700; }
+.muted { color: #555; font-size: 12px; }
+select { padding: 4px 6px; }
+
+.legend {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 999;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+  font-size: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.10);
+  min-width: 220px;
+}
+
+.legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
+.swatch { width: 14px; height: 14px; border: 1px solid #999; }
+
