@@ -40,3 +40,67 @@ select { padding: 4px 6px; }
 .legend-item { display: flex; align-items: center; gap: 8px; margin: 4px 0; }
 .swatch { width: 14px; height: 14px; border: 1px solid #999; }
 
+.split {
+  height: 100vh;
+  display: flex;
+}
+
+.map-pane {
+  flex: 1 1 auto;
+  height: 100%;
+  background: #fff;
+}
+
+.side-pane {
+  width: 460px;
+  max-width: 50vw;
+  height: 100%;
+  overflow: auto;
+  padding: 12px;
+  box-sizing: border-box;
+  border-left: 1px solid #eee;
+  background: #fff;
+}
+
+.panel-static {
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+  font-size: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.card {
+  margin-top: 12px;
+  background: rgba(255,255,255,0.95);
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif;
+
+  height: 320px;
+  box-sizing: border-box;
+}
+
+.card canvas {
+  display: block;
+  width: 100% !important;
+  height: calc(320px - 44px) !important;
+}
+
+.card-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.static-legend {
+  position: static;
+  margin-top: 12px;
+  right: auto;
+  bottom: auto;
+  min-width: unset;
+}
+

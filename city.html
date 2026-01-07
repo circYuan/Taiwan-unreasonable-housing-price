@@ -10,40 +10,51 @@
 </head>
 
 <body>
-  <div id="map"></div>
+  <div class="split">
+    <div id="map" class="map-pane"></div>
 
-  <div class="panel" id="panel">
-    <div class="row">
-      <div class="title">
-        <a id="back" href="./index.html" style="text-decoration:none;">←</a>
-        <span id="cityTitle">縣市</span>：<span id="name">（滑鼠移上去）</span>
+    <div class="side-pane">
+      <div class="panel-static" id="panel">
+        <div class="row">
+          <div class="title">
+            <a id="back" href="./index.html" style="text-decoration:none;">←</a>
+            <span id="cityTitle">縣市</span>：<span id="name">（滑鼠移上去）</span>
+          </div>
+          <div class="muted">樣本數：<span id="count">—</span></div>
+        </div>
+
+        <div class="row" style="margin-top:6px;">
+          <div id="value">—</div>
+          <div class="muted" id="unit"></div>
+        </div>
+
+        <div class="row" style="margin-top:8px;">
+          <div class="muted">季度：</div>
+          <select id="quarter"></select>
+
+          <div class="muted">指標：</div>
+          <select id="metric">
+            <option value="median_total_price">總價中位數</option>
+            <option value="median_unit_price_ping">單價中位數（元/坪）</option>
+          </select>
+
+          <div class="muted">（樣本 &lt; 10 會淡化）</div>
+        </div>
       </div>
-      <div class="muted">樣本數：<span id="count">—</span></div>
-    </div>
 
-    <div class="row" style="margin-top:6px;">
-      <div id="value">—</div>
-      <div class="muted" id="unit"></div>
-    </div>
+      <div class="card">
+        <div class="card-title">縣市趨勢（季度中位數）</div>
+        <canvas id="trendChart" height="220"></canvas>
+      </div>
 
-    <div class="row" style="margin-top:8px;">
-      <div class="muted">季度：</div>
-      <select id="quarter"></select>
-
-      <div class="muted">指標：</div>
-      <select id="metric">
-        <option value="median_total_price">總價中位數</option>
-        <option value="median_unit_price_ping">單價中位數（元/坪）</option>
-      </select>
-
-      <div class="muted">（樣本 &lt; 10 會淡化）</div>
+      <div class="legend static-legend" id="legend"></div>
     </div>
   </div>
 
-  <div class="legend" id="legend"></div>
-
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <script type="module" src="./js/city_app.js"></script>
 </body>
+
 </html>
 

@@ -1,11 +1,24 @@
 import { loadGeoJson, loadJson } from "./data.js";
 import { createMap, renderTownLayer } from "./map_town.js";
 import { renderLegend } from "./legend.js";
-import { bindUi, initQuarterOptions, getSelections, setHoverPanel, setEmptyPanel, setCityTitle } from "./ui_city.js";
+import {
+  bindUi, initQuarterOptions, getSelections,
+  setHoverPanel, setEmptyPanel, setCityTitle
+} from "./ui_city.js";
+import { renderTrendChart } from "./chart_trend.js";
 
 function getCountyFromQuery() {
   const url = new URL(window.location.href);
   return url.searchParams.get("county") || "";
+}
+
+function buildCountySeries({ countyStatsAll, countyName, metric }) {
+  const qs = countyStatsAll.quarters || [];
+  const values = qs.map(q => {
+    const rec = countyStatsAll.data?.[q]?.[countyName];
+    return rec ? rec[metric] : null;
+  });
+  return { quarters: qs, values };
 }
 
 async function main() {
@@ -20,16 +33,17 @@ async function main() {
 
   const map = createMap("map");
 
-  const [geoData, statsAll] = await Promise.all([
+  const [geoData, townStatsAll, countyStatsAll] = await Promise.all([
     loadGeoJson("./taiwan_town_simplified.geojson"),
     loadJson("./stats_by_town_quarter.json"),
+    loadJson("./stats_by_county_quarter.json"),
   ]);
 
-  initQuarterOptions(statsAll);
+  initQuarterOptions(townStatsAll);
 
   function redraw() {
     const { quarter, metric } = getSelections();
-    const statsQ = statsAll.data?.[quarter] || {};
+    const statsQ = townStatsAll.data?.[quarter] || {};
 
     const { layer, thresholds } = renderTownLayer({
       map,
@@ -43,6 +57,16 @@ async function main() {
 
     renderLegend({ thresholds, metric });
     map.fitBounds(layer.getBounds(), { padding: [10, 10] });
+
+    // 右側趨勢圖（縣市層級）
+    const { quarters, values } = buildCountySeries({ countyStatsAll, countyName, metric });
+    renderTrendChart({
+      canvasId: "trendChart",
+      quarters,
+      values,
+      metric,
+      highlightQuarter: quarter,
+    });
   }
 
   bindUi(redraw);
