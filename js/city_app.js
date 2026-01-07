@@ -56,7 +56,6 @@ async function main() {
     });
 
     renderLegend({ thresholds, metric });
-    map.fitBounds(layer.getBounds(), { padding: [10, 10] });
 
     // 右側趨勢圖（縣市層級）
     const { quarters, values } = buildCountySeries({ countyStatsAll, countyName, metric });

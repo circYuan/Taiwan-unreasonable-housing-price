@@ -81,6 +81,22 @@ export function renderTownLayer({ map, geoData, statsQ, metric, countyName, onHo
     }
   }).addTo(map);
 
+   // ✅ 1) 預設 zoom 到該縣市適中
+  const b = layer.getBounds();
+  map.fitBounds(b, { padding: [30, 30] });
+
+  // ✅ 2) 限制拖曳：以該縣市 bounds 為主，pad 一點避免太緊
+  const maxB = b.pad(0.30);
+  map.setMaxBounds(maxB);
+  map.options.maxBoundsViscosity = 0.9;
+
+  // ✅ 3) 限制縮放：避免縮到世界/放太大
+  const z = map.getZoom();
+  map.setMinZoom(Math.max(6, z - 1));  // 縣市內：min zoom 通常比全台高
+  map.setMaxZoom(z + 5);               // 縣市內：多給一點放大空間
+
+  setTimeout(() => map.invalidateSize(), 0);
+
   return { layer, thresholds };
 }
 
